@@ -11,6 +11,7 @@ import GoogleMaps
 import CoreLocation
 import Alamofire
 
+import OAuthSwift
 
 
 class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
@@ -24,14 +25,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
     var latitude: Double = 45.507324
     var longitude: Double = -122.618419
     var cameraZoom : Float = 12
+    var postalCode: String = ""
+    var locale: String = ""
 
     let yelp_api_key:String = "YHLpRxukJnjKlqSovUJ1Qw"
-    var yelp_search_location: String = "https://api.yelp.com/v2/search/?location="
-    var yelp_search_location_end: String = "&category_filter=pizza"
+    let yelp_api_secret:String = "W3vGmYPT6jc0N5lShpw0OSzeGQk"
+    let yelp_api_token:String = "WW1PJiUP9RagnvJiS4IYHlCjjXfy-HS3"
+    let yelp_api_token_secret:String = "7OfmO9imvtbgr0hfq-CcQPR7cLw"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         findMe()
+        get()
         
         let camera = GMSCameraPosition.cameraWithLatitude(latitude,
             longitude: longitude, zoom: cameraZoom)
@@ -80,13 +85,17 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
         })
     }
     
-
-        func displayLocationInfo(placemark: CLPlacemark){
+    func displayLocationInfo(placemark: CLPlacemark){
             locationManager.stopUpdatingLocation()
-                print(placemark.locality)
-                print(placemark.postalCode)
-                print(placemark.administrativeArea)
-                print(placemark.country)
+            if placemark.locality != nil {
+                locale = placemark.locality!
+//                print(placemark.locality)
+            }
+            if placemark.postalCode != nil{
+                postalCode = placemark.postalCode!
+//                print(placemark.postalCode)
+            }
+
         }
     
     
@@ -112,18 +121,33 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
         
     }
     
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        if segue.identifier == "GSegue"
-//        {
-//            if let destinationVC = segue.destinationViewController as? GuillotineMenu{
-//                print("cool")
-//                
-//            }
-//        }
-//    }'
+
     func get(){
+        Alamofire.request(.GET, search, parameters: ["api_key": yelp_api_key]).responseJSON { request, response, result in
+            switch result {
+            case .Success(let JSON):
+                print("Success with JSON: \(JSON)")
+                
+            case .Failure(let data, let error):
+                print("Request failed with error: \(error)")
+                
+                if let data = data {
+                    print("Response data: \(NSString(data: data, encoding: NSUTF8StringEncoding)!)")
+                }
+            }
+        }
         
-//        Alamofire.request(.GET, yelp_search_location + + yelp_search_location_end)
+    }
+    
+
+    func yelpURLBuilder() -> String{
+        
+        
+        var yelp_search_location: String = "https://api.yelp.com/v2/search/?location="
+        var yelp_search_location_end: String = "&category_filter=pizza"
+        let url = NSURL(string: "https://api.yelp.com/v2/")
+        
+        
     }
     
     
