@@ -10,7 +10,6 @@ import UIKit
 import GoogleMaps
 import CoreLocation
 import Alamofire
-
 import OAuthSwift
 
 
@@ -27,11 +26,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
     var cameraZoom : Float = 12
     var postalCode: String = ""
     var locale: String = ""
-
-    let yelp_api_key:String = "YHLpRxukJnjKlqSovUJ1Qw"
-    let yelp_api_secret:String = "W3vGmYPT6jc0N5lShpw0OSzeGQk"
-    let yelp_api_token:String = "WW1PJiUP9RagnvJiS4IYHlCjjXfy-HS3"
-    let yelp_api_token_secret:String = "7OfmO9imvtbgr0hfq-CcQPR7cLw"
+    let YelpBaseUrl = "http://api.yelp.com/v2/"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -123,7 +118,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
     
 
     func get(){
-        Alamofire.request(.GET, search, parameters: ["api_key": yelp_api_key]).responseJSON { request, response, result in
+        
+//        let search = YelpHelper().clientOAuth?.get(YelpBaseUrl + "?location=San Francisco, CA", parameters: [], success: , failure: (){})
+        Alamofire.request(.GET, search).responseJSON { request, response, result in
             switch result {
             case .Success(let JSON):
                 print("Success with JSON: \(JSON)")
@@ -140,16 +137,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
     }
     
 
-    func yelpURLBuilder() -> String{
-        
-        
-        var yelp_search_location: String = "https://api.yelp.com/v2/search/?location="
-        var yelp_search_location_end: String = "&category_filter=pizza"
-        let url = NSURL(string: "https://api.yelp.com/v2/")
-        
-        
-    }
-    
     
     
 }
