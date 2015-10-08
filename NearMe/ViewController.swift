@@ -37,7 +37,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
     override func viewDidLoad() {
         super.viewDidLoad()
         findMe()
-        get()
+        getJSON()
         
         let camera = GMSCameraPosition.cameraWithLatitude(latitude,
             longitude: longitude, zoom: cameraZoom)
@@ -52,14 +52,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
         mapView.delegate = self
         
         mapViewContainer.addSubview(mapView)
-        
-        
-        //        var marker = GMSMarker()
-        //        marker.position = camera.target
-        //        marker.appearAnimation = kGMSMarkerAnimationPop
-        //        marker.title = "Sydney"
-        //        marker.snippet = "Australia"
-        //        marker.map = mapView
     }
     
     override func didReceiveMemoryWarning() {
@@ -67,6 +59,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
         // Dispose of any resources that can be recreated.
     }
     
+    //activates the reverse geocoder; turning longitude/latitude into a specific location
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         CLGeocoder().reverseGeocodeLocation(manager.location!, completionHandler: {(placemarks, error)->Void in
             
@@ -85,6 +78,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
         })
     }
     
+    //displays the location from the given placemark
     func displayLocationInfo(placemark: CLPlacemark){
         locationManager.stopUpdatingLocation()
         if placemark.locality != nil {
@@ -97,13 +91,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
         
     }
     
-    
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        print("An error has occured while updating location: " + error.localizedDescription)
-    }
-    
-    
-    
+    //activates the location manager and returns the latitude and longitude of the current location
     func findMe(){
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -121,8 +109,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
         
     }
     
-    
-    func get(){
+    //should return in JSON form the restaurants in the vicinity.
+    //Does not work fully
+    //Issues with oauth information
+    func getJSON(){
         let parameters = ["consumer_key": yelp_api_key, "consumer_secret": yelp_api_secret, "token": yelp_api_token, "token_secret": yelp_api_token_secret]
         var url = "https://api.yelp.com/v2/search/?location=" + locale
         url = url.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
