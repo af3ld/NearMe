@@ -27,4 +27,11 @@ class YelpHelper: NSObject {
         self.clientOAuth = OAuthSwiftClient(consumerKey: apiConsoleInfo.yelp_api_key, consumerSecret: apiConsoleInfo.yelp_api_secret, accessToken: apiConsoleInfo.yelp_api_token, accessTokenSecret: apiConsoleInfo.yelp_api_token_secret)
         super.init()
     }
+    
+    func printer(){
+        print(apiConsoleInfo)
+    }
 }
+
+
+

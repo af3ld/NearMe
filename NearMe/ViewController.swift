@@ -11,6 +11,7 @@ import GoogleMaps
 import CoreLocation
 import Alamofire
 import OAuthSwift
+import SwiftyJSON
 
 
 class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
@@ -20,6 +21,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
     let locationManager = CLLocationManager()
     var geocoder : CLGeocoder = CLGeocoder()
     var placemark : CLPlacemark = CLPlacemark()
+    
+    let yelp_api_key:String = "YHLpRxukJnjKlqSovUJ1Qw"
+    let yelp_api_secret:String = "W3vGmYPT6jc0N5lShpw0OSzeGQk"
+    let yelp_api_token:String = "WW1PJiUP9RagnvJiS4IYHlCjjXfy-HS3"
+    let yelp_api_token_secret:String = "7OfmO9imvtbgr0hfq-CcQPR7cLw"
     
     var latitude: Double = 45.507324
     var longitude: Double = -122.618419
@@ -81,17 +87,17 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
     }
     
     func displayLocationInfo(placemark: CLPlacemark){
-            locationManager.stopUpdatingLocation()
-            if placemark.locality != nil {
-                locale = placemark.locality!
-//                print(placemark.locality)
-            }
-            if placemark.postalCode != nil{
-                postalCode = placemark.postalCode!
-//                print(placemark.postalCode)
-            }
-
+        locationManager.stopUpdatingLocation()
+        if placemark.locality != nil {
+            locale = placemark.locality!
+            //                print(placemark.locality)
         }
+        if placemark.postalCode != nil{
+            postalCode = placemark.postalCode!
+            //                print(placemark.postalCode)
+        }
+        
+    }
     
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
@@ -116,11 +122,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
         
     }
     
-
+    
     func get(){
+        let parameters = ["consumer_key": yelp_api_key, "consumer_secret": yelp_api_secret, "token": yelp_api_token, "token_secret": yelp_api_token_secret]
+        var url = "https://api.yelp.com/v2/search/?location=San Francisco, CA"
+        url = url.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
         
-//        let search = YelpHelper().clientOAuth?.get(YelpBaseUrl + "?location=San Francisco, CA", parameters: [], success: , failure: (){})
-        Alamofire.request(.GET, search).responseJSON { request, response, result in
+        Alamofire.request(.GET, url, parameters: parameters ).validate().responseJSON
+            { request, response, result in
             switch result {
             case .Success(let JSON):
                 print("Success with JSON: \(JSON)")
@@ -132,11 +141,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
                     print("Response data: \(NSString(data: data, encoding: NSUTF8StringEncoding)!)")
                 }
             }
+
         }
-        
     }
     
-
+    
     
     
 }
