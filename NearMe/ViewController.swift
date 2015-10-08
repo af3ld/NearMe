@@ -67,7 +67,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
         // Dispose of any resources that can be recreated.
     }
     
-    
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         CLGeocoder().reverseGeocodeLocation(manager.location!, completionHandler: {(placemarks, error)->Void in
             
@@ -90,11 +89,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
         locationManager.stopUpdatingLocation()
         if placemark.locality != nil {
             locale = placemark.locality!
-            //                print(placemark.locality)
         }
         if placemark.postalCode != nil{
             postalCode = placemark.postalCode!
-            //                print(placemark.postalCode)
+//                            print(placemark.postalCode)
         }
         
     }
@@ -113,6 +111,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
         locationManager.startUpdatingLocation()
         let locale = locationManager.location
         
+        
         if (locale != nil) {
             latitude = locationManager.location!.coordinate.latitude
             longitude = locationManager.location!.coordinate.longitude
@@ -125,7 +124,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
     
     func get(){
         let parameters = ["consumer_key": yelp_api_key, "consumer_secret": yelp_api_secret, "token": yelp_api_token, "token_secret": yelp_api_token_secret]
-        var url = "https://api.yelp.com/v2/search/?location=San Francisco, CA"
+        var url = "https://api.yelp.com/v2/search/?location=" + locale
         url = url.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
         
         Alamofire.request(.GET, url, parameters: parameters ).validate().responseJSON

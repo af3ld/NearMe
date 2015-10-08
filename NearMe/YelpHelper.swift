@@ -28,9 +28,6 @@ class YelpHelper: NSObject {
         super.init()
     }
     
-    func printer(){
-        print(apiConsoleInfo)
-    }
 }
 
 
