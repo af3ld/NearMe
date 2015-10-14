@@ -24,8 +24,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
     
     let yelp_api_key:String = "YHLpRxukJnjKlqSovUJ1Qw"
     let yelp_api_secret:String = "W3vGmYPT6jc0N5lShpw0OSzeGQk"
-    let yelp_api_token:String = "WW1PJiUP9RagnvJiS4IYHlCjjXfy-HS3"
-    let yelp_api_token_secret:String = "7OfmO9imvtbgr0hfq-CcQPR7cLw"
+    let yelp_api_token:String = "q7sHJImJ41kEI2voGJR04N_od90RVzic"
+    let yelp_api_token_secret:String = "lwJz_qaaVezBF9j4IelMekBL2N8"
     
     var latitude: Double = 45.507324
     var longitude: Double = -122.618419
@@ -114,11 +114,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
     //Issues with oauth information
     func getJSON(){
         let parameters = ["consumer_key": yelp_api_key, "consumer_secret": yelp_api_secret, "token": yelp_api_token, "token_secret": yelp_api_token_secret]
+        
         var url = "https://api.yelp.com/v2/search/?location=" + locale
         url = url.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
         
-        Alamofire.request(.GET, url, parameters: parameters ).validate().responseJSON
-            { request, response, result in
+        Alamofire.request(.GET, url, parameters: parameters ).responseJSON {
+            (req, res, json, error) in
             switch result {
             case .Success(let JSON):
                 print("Success with JSON: \(JSON)")
