@@ -52,14 +52,16 @@ code_sign_if_enabled() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework 'Pods/AFNetworking.framework'
   install_framework 'Pods/Alamofire.framework'
+  install_framework 'Pods/BDBOAuth1Manager.framework'
   install_framework 'Pods/OAuthSwift.framework'
   install_framework 'Pods/SwiftyJSON.framework'
-  install_framework 'Pods/p2_OAuth2.framework'
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework 'Pods/AFNetworking.framework'
   install_framework 'Pods/Alamofire.framework'
+  install_framework 'Pods/BDBOAuth1Manager.framework'
   install_framework 'Pods/OAuthSwift.framework'
   install_framework 'Pods/SwiftyJSON.framework'
-  install_framework 'Pods/p2_OAuth2.framework'
 fi

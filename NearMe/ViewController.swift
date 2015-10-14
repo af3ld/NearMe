@@ -10,8 +10,8 @@ import UIKit
 import GoogleMaps
 import CoreLocation
 import Alamofire
-import OAuthSwift
 import SwiftyJSON
+import AFNetworking
 
 
 class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
@@ -32,7 +32,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
     var cameraZoom : Float = 12
     var postalCode: String = ""
     var locale: String = ""
-    let YelpBaseUrl = "http://api.yelp.com/v2/"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -109,30 +108,19 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
         
     }
     
+    
+    
     //should return in JSON form the restaurants in the vicinity.
     //Does not work fully
     //Issues with oauth information
     func getJSON(){
-        let parameters = ["consumer_key": yelp_api_key, "consumer_secret": yelp_api_secret, "token": yelp_api_token, "token_secret": yelp_api_token_secret]
-        
+
         var url = "https://api.yelp.com/v2/search/?location=" + locale
         url = url.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
         
-        Alamofire.request(.GET, url, parameters: parameters ).responseJSON {
-            (req, res, json, error) in
-            switch result {
-            case .Success(let JSON):
-                print("Success with JSON: \(JSON)")
-                
-            case .Failure(let data, let error):
-                print("Request failed with error: \(error)")
-                
-                if let data = data {
-                    print("Response data: \(NSString(data: data, encoding: NSUTF8StringEncoding)!)")
-                }
-            }
-
-        }
+        let client = APIHelper(consumerKey: yelp_api_key, consumerSecret: yelp_api_secret, accessToken: yelp_api_token, accessSecret: yelp_api_token_secret)
+      
+    
     }
     
     

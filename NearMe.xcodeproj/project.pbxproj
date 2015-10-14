@@ -17,7 +17,7 @@
 		40E371B71BC44C11008DD1B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40E371B51BC44C11008DD1B8 /* LaunchScreen.storyboard */; };
 		40E371C21BC44C11008DD1B8 /* NearMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E371C11BC44C11008DD1B8 /* NearMeTests.swift */; };
 		40E371CD1BC44C11008DD1B8 /* NearMeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E371CC1BC44C11008DD1B8 /* NearMeUITests.swift */; };
-		40F2718D1BC59CFC00B61376 /* YelpHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F2718C1BC59CFC00B61376 /* YelpHelper.swift */; settings = {ASSET_TAGS = (); }; };
+		40F2718D1BC59CFC00B61376 /* APIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F2718C1BC59CFC00B61376 /* APIHelper.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4005B5061BCED94C003856AE /* NearMeHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NearMeHeader.h; sourceTree = "<group>"; };
 		408F3C171BC44ECE0042517E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		40E371A61BC44C11008DD1B8 /* NearMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NearMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40E371A91BC44C11008DD1B8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -53,7 +54,7 @@
 		40E371C81BC44C11008DD1B8 /* NearMeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NearMeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		40E371CC1BC44C11008DD1B8 /* NearMeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearMeUITests.swift; sourceTree = "<group>"; };
 		40E371CE1BC44C11008DD1B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		40F2718C1BC59CFC00B61376 /* YelpHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YelpHelper.swift; sourceTree = "<group>"; };
+		40F2718C1BC59CFC00B61376 /* APIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIHelper.swift; sourceTree = "<group>"; };
 		506E02902C682E786DBEDEB5 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C47F23A5375641A5B303453E /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC603914A3720D8CA3903DDE /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -131,12 +132,13 @@
 			children = (
 				40E371A91BC44C11008DD1B8 /* AppDelegate.swift */,
 				40E371AB1BC44C11008DD1B8 /* ViewController.swift */,
-				40F2718C1BC59CFC00B61376 /* YelpHelper.swift */,
+				40F2718C1BC59CFC00B61376 /* APIHelper.swift */,
 				40E371AD1BC44C11008DD1B8 /* Main.storyboard */,
 				40E371B31BC44C11008DD1B8 /* Assets.xcassets */,
 				40E371B51BC44C11008DD1B8 /* LaunchScreen.storyboard */,
 				40E371B81BC44C11008DD1B8 /* Info.plist */,
 				40E371B01BC44C11008DD1B8 /* NearMe.xcdatamodeld */,
+				4005B5061BCED94C003856AE /* NearMeHeader.h */,
 			);
 			path = NearMe;
 			sourceTree = "<group>";
@@ -341,7 +343,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				40E371AC1BC44C11008DD1B8 /* ViewController.swift in Sources */,
-				40F2718D1BC59CFC00B61376 /* YelpHelper.swift in Sources */,
+				40F2718D1BC59CFC00B61376 /* APIHelper.swift in Sources */,
 				40E371AA1BC44C11008DD1B8 /* AppDelegate.swift in Sources */,
 				40E371B21BC44C11008DD1B8 /* NearMe.xcdatamodeld in Sources */,
 			);
@@ -439,6 +441,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = NearMe/NearMeHeader.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -477,6 +480,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = NearMe/NearMeHeader.h;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

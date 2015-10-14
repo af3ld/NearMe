@@ -1,22 +1,47 @@
 PODS:
+  - AFNetworking (2.6.1):
+    - AFNetworking/NSURLConnection (= 2.6.1)
+    - AFNetworking/NSURLSession (= 2.6.1)
+    - AFNetworking/Reachability (= 2.6.1)
+    - AFNetworking/Security (= 2.6.1)
+    - AFNetworking/Serialization (= 2.6.1)
+    - AFNetworking/UIKit (= 2.6.1)
+  - AFNetworking/NSURLConnection (2.6.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.6.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.6.1)
+  - AFNetworking/Security (2.6.1)
+  - AFNetworking/Serialization (2.6.1)
+  - AFNetworking/UIKit (2.6.1):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
   - Alamofire (3.0.0)
+  - BDBOAuth1Manager (1.6.0):
+    - AFNetworking/NSURLConnection (~> 2.6.0)
+    - AFNetworking/NSURLSession (~> 2.6.0)
   - GoogleMaps (1.10.3)
   - OAuthSwift (0.4.6)
-  - p2.OAuth2 (2.0.1)
   - SwiftyJSON (2.3.0)
 
 DEPENDENCIES:
+  - AFNetworking
   - Alamofire
+  - BDBOAuth1Manager
   - GoogleMaps
   - OAuthSwift
-  - p2.OAuth2
   - SwiftyJSON
 
 SPEC CHECKSUMS:
+  AFNetworking: 8e4e60500beb8bec644cf575beee72990a76d399
   Alamofire: b61782387f81bcc538a0284cf2bb5d7995cd0a80
+  BDBOAuth1Manager: cd5a5872f355ca38180d52ca2dd844f0b0c84797
   GoogleMaps: 945e4ac3b74bcca3ddada51df256eb7beddb474d
   OAuthSwift: 8c738cc56c942a541f5c6d0362a892cb149d10b1
-  p2.OAuth2: 6d4183a4dcec05cc6df3bab1110551854a116b9c
   SwiftyJSON: 8d6b61a70277ef2a5d710d372e06e7e2d87fb9e4
 
 COCOAPODS: 0.38.2
