@@ -8,7 +8,6 @@
 
 import Foundation
 import AFNetworking
-import OAuthSwift
 import BDBOAuth1Manager
 
 class APIHelper: BDBOAuth1RequestOperationManager {
@@ -18,7 +17,7 @@ class APIHelper: BDBOAuth1RequestOperationManager {
     var api_key: String!
     var api_secret: String!
     
-    
+    //constructor for client OAuth client
     init(consumerKey key: String!, consumerSecret secret: String!, accessToken: String!, accessSecret: String!) {
         self.token = accessToken
         self.token_secret = accessSecret
